@@ -125,11 +125,17 @@ async def get_weather(request:Request,lat:float=None,lon:float=None):
         country = location_json['location']['country_name']
 
     elif lat and (lon is None) or lon and (lat is None):
-        raise HTTPException(status_code=400, detail="Both lat and lon must be provided together, or neither should be provided")
+        raise HTTPException(status_code=400, detail={
+        "error": "Invalid coordinates provided",
+        "code": "INVALID_COORDINATES"
+    })
 
     elif(lat>90) or (lat<-90) or (lon>180) or (lon<-180):
         #return 400
-        raise HTTPException(status_code=400, detail="Co-ordinates are out of bound")
+        raise HTTPException(status_code=400, detail={
+        "error": "Invalid coordinates provided",
+        "code": "INVALID_COORDINATES"
+    })
     else:
         city, country = await get_location_name(lat, lon)
 
