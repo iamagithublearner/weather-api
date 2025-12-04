@@ -117,6 +117,8 @@ async def get_weather(request:Request,lat:float=None,lon:float=None):
             ip = forwarded.split(",")[0]
         else:
             ip = request.client.host
+        if ip is None:
+            raise HTTPException(status_code=400,detail={"error": "Unable to calculate location via IP", "code": "IP_LOCATION_FAILED"})
         location_json = await get_ip_location(ip)
         message= f"Location determined from IP address: {ip}"
         lon = location_json['location']['longitude']
@@ -125,25 +127,17 @@ async def get_weather(request:Request,lat:float=None,lon:float=None):
         country = location_json['location']['country_name']
 
     elif lat and (lon is None) or lon and (lat is None):
-        raise HTTPException(status_code=400, detail={
-        "error": "Invalid coordinates provided",
-        "code": "INVALID_COORDINATES"
-    })
+        raise HTTPException(status_code=400, detail={"error": "only one co-ordinate was provided , either provide both or none", "code": "INVALID_COORDINATES"})
 
     elif(lat>90) or (lat<-90) or (lon>180) or (lon<-180):
         #return 400
-        raise HTTPException(status_code=400, detail={
-        "error": "Invalid coordinates provided",
-        "code": "INVALID_COORDINATES"
-    })
+        raise HTTPException(status_code=400, detail={"error": "CO-ordinates out of bounds","code": "INVALID_COORDINATES"})
     else:
         city, country = await get_location_name(lat, lon)
 
     weather_data = await get_weather_from_openmeteo(lat,lon)
     if weather_data is None:
-        return{
-            "error":"Weather api unavailable"
-        }
+        raise HTTPException(status_code=400, detail={"error": "Error message","code": "WEATHER_SERVICE_ERROR"})
     weather_code = weather_data["current"]["weather_code"]
 
     return {
