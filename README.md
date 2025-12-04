@@ -14,6 +14,7 @@ https://weather.hoelab.org/weather
 
 # Set up
 1.Change API_KEY variable in main.py, you can get api key from https://ipgeolocation.io
+
 2.Install all libraries from requirements.txt 
 ```python
 pip install -r requirements.txt
