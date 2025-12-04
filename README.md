@@ -9,14 +9,15 @@ curl https://your-deployed-api.com/weather
 ```bash
 curl "https://your-deployed-api.com/weather?lat=40.7128&lon=-74.0060"
 ```
+Live demo of this api is available at: https://weather.hoelab.org/weather
 
 # Set up
 1.Change API_KEY variable in main.py, you can get api key from https://ipgeolocation.io
-1.Install all libraries from requirements.txt 
+2.Install all libraries from requirements.txt 
 ```python
-    pip install -r requirements.txt
+pip install -r requirements.txt
 ```
-2.Run the python script
+3.Run the python script
 ```bash
 fastapi run main.py
 ```
