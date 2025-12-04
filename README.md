@@ -1,5 +1,3 @@
-A lightweight and fast Weather API service built with FastAPI, providing real-time weather data using Open-Meteo and automatic location detection using IP Geolocation or GPS coordinates.
-
 # Example usage of API
 1.Using IP-based location:
 ```bash
