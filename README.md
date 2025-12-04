@@ -1,0 +1,41 @@
+A lightweight and fast Weather API service built with FastAPI, providing real-time weather data using Open-Meteo and automatic location detection using IP Geolocation or GPS coordinates.
+
+# Example usage of API
+Using IP-based location:
+curl https://your-deployed-api.com/weather
+Using coordinates:
+curl "https://your-deployed-api.com/weather?lat=40.7128&lon=-74.0060"
+
+# Set up
+1.Install all libraries from requirements.txt 
+```python
+    pip install -r requirements.txt
+```
+2.Run the python script
+```bash
+fastapi run main.py
+```
+
+This API returns weather data in the following structured JSON format:
+```json
+{
+ "location": {
+ "city": "San Francisco",
+ "country": "US",
+ "coordinates": {
+ "latitude": 37.7749,
+ "longitude": -122.4194
+ }
+ },
+ "weather": {
+ "temperature": 18.5,
+ "temperature_unit": "celsius",
+ "description": "Partly cloudy",
+ "humidity": 75,
+ "wind_speed": 12.5,
+ "wind_speed_unit": "km/h"
+ },
+ "location_method": "ip_based" | "coordinates",
+ "message": "Location determined from IP address: 192.168.1.1" | null
+}
+```
