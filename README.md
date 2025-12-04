@@ -1,12 +1,17 @@
 A lightweight and fast Weather API service built with FastAPI, providing real-time weather data using Open-Meteo and automatic location detection using IP Geolocation or GPS coordinates.
 
 # Example usage of API
-Using IP-based location:
+1.Using IP-based location:
+```bash
 curl https://your-deployed-api.com/weather
-Using coordinates:
+```
+2.Using coordinates:
+```bash
 curl "https://your-deployed-api.com/weather?lat=40.7128&lon=-74.0060"
+```
 
 # Set up
+1.Change API_KEY variable in main.py, you can get api key from https://ipgeolocation.io
 1.Install all libraries from requirements.txt 
 ```python
     pip install -r requirements.txt
